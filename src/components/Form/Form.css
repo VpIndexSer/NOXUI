@@ -1,0 +1,64 @@
+/* src/components/Form/Form.css */
+.custom-form {
+    width: 100%;
+  }
+  
+  .custom-form.layout-horizontal .form-item {
+    margin-bottom: 24px;
+  }
+  
+  .custom-form.layout-vertical .form-item {
+    margin-bottom: 16px;
+  }
+  
+  .custom-form.layout-inline .form-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .form-item label {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+  }
+  
+  .form-item label.required::before {
+    content: '*';
+    color: #ff4d4f;
+    margin-right: 4px;
+  }
+  
+  .form-item.has-error .input-field,
+  .form-item.has-error .custom-select,
+  .form-item.has-error .date-input {
+    border-color: #ff4d4f;
+  }
+  
+  .error-message {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  /* Layout specific styles */
+  .layout-horizontal .form-item {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .layout-vertical .form-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .layout-inline .form-item {
+    margin-right: 16px;
+  }
+  
+  .layout-inline label {
+    margin-right: 8px;
+    margin-bottom: 0;
+  }

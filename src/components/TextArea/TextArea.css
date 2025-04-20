@@ -1,0 +1,71 @@
+/* src/components/Textarea/Textarea.css */
+.custom-textarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.textarea-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.textarea-container {
+  position: relative;
+}
+
+.textarea-field {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s;
+  resize: vertical;
+  min-height: 32px;
+  font-family: inherit;
+}
+
+.textarea-field:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.textarea-field:hover {
+  border-color: #40a9ff;
+}
+
+.textarea-field:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.textarea-field.has-error {
+  border-color: #ff4d4f;
+}
+
+.textarea-field.has-error:focus {
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.textarea-error {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.textarea-count {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 4px;
+  border-radius: 4px;
+}

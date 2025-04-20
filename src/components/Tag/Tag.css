@@ -1,0 +1,75 @@
+.nox-tag {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 8px 8px 0;
+  padding: 0 7px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  background: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  cursor: default;
+  transition: all 0.3s;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.nox-tag:hover {
+  color: #40a9ff;
+  background: #fff;
+  border-color: #40a9ff;
+}
+
+.nox-tag-content {
+  display: inline-block;
+  margin-right: 0;
+}
+
+.nox-tag-close {
+  margin-left: 3px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nox-tag-close:hover {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* Preset colors */
+.nox-tag-blue {
+  color: #1890ff;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.nox-tag-green {
+  color: #52c41a;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+.nox-tag-red {
+  color: #f5222d;
+  background: #fff1f0;
+  border-color: #ffa39e;
+}
+
+.nox-tag-orange {
+  color: #fa8c16;
+  background: #fff7e6;
+  border-color: #ffd591;
+}
+
+.nox-tag-purple {
+  color: #722ed1;
+  background: #f9f0ff;
+  border-color: #d3adf7;
+}
+
+.nox-tag-cyan {
+  color: #13c2c2;
+  background: #e6fffb;
+  border-color: #87e8de;
+} 

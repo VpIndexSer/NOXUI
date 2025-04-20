@@ -1,0 +1,63 @@
+.modal-example-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.description {
+  display: block;
+  margin-bottom: 24px;
+  color: #8c8c8c;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.custom-modal-content {
+  padding: 16px;
+}
+
+.custom-modal-content ul {
+  margin-top: 16px;
+  padding-left: 20px;
+}
+
+.custom-modal-content li {
+  margin-bottom: 8px;
+}
+
+.fullscreen-modal-content {
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.fullscreen-modal-content .ant-typography {
+  margin-bottom: 16px;
+}
+
+.fullscreen-modal-actions {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .modal-example-container {
+    padding: 16px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+} 

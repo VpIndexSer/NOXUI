@@ -1,0 +1,32 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+.icon-close {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-close::before,
+.icon-close::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 2px;
+  background-color: currentColor;
+  top: 6px;
+  left: 0;
+}
+
+.icon-close::before {
+  transform: rotate(45deg);
+}
+
+.icon-close::after {
+  transform: rotate(-45deg);
+} 

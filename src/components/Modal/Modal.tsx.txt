@@ -1,0 +1,290 @@
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
+import Button from '../Button';
+import Icon from '../Icon';
+import './Modal.css';
+
+export interface ModalProps {
+  /**
+   * Whether the modal dialog is visible or not
+   */
+  visible?: boolean;
+  /**
+   * The modal's title
+   */
+  title?: React.ReactNode;
+  /**
+   * Whether to show the close button in the top-right corner
+   */
+  closable?: boolean;
+  /**
+   * Whether to close the modal when clicking the mask or close button
+   */
+  maskClosable?: boolean;
+  /**
+   * Whether to show the mask
+   */
+  mask?: boolean;
+  /**
+   * Whether to center the modal vertically
+   */
+  centered?: boolean;
+  /**
+   * The modal's width
+   */
+  width?: number | string;
+  /**
+   * The modal's top margin
+   */
+  top?: number | string;
+  /**
+   * The modal's z-index
+   */
+  zIndex?: number;
+  /**
+   * The modal's footer
+   */
+  footer?: React.ReactNode;
+  /**
+   * Whether to destroy the modal when it is closed
+   */
+  destroyOnClose?: boolean;
+  /**
+   * Whether to show the modal in full screen
+   */
+  fullscreen?: boolean;
+  /**
+   * The modal's class name
+   */
+  className?: string;
+  /**
+   * The modal's style
+   */
+  style?: React.CSSProperties;
+  /**
+   * The modal's mask style
+   */
+  maskStyle?: React.CSSProperties;
+  /**
+   * The modal's body style
+   */
+  bodyStyle?: React.CSSProperties;
+  /**
+   * The modal's header style
+   */
+  headerStyle?: React.CSSProperties;
+  /**
+   * The modal's footer style
+   */
+  footerStyle?: React.CSSProperties;
+  /**
+   * The modal's close icon
+   */
+  closeIcon?: React.ReactNode;
+  /**
+   * The modal's ok button text
+   */
+  okText?: React.ReactNode;
+  /**
+   * The modal's cancel button text
+   */
+  cancelText?: React.ReactNode;
+  /**
+   * The modal's ok button props
+   */
+  okButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  /**
+   * The modal's cancel button props
+   */
+  cancelButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  /**
+   * The modal's ok button type
+   */
+  okType?: 'primary' | 'default' | 'dashed' | 'link' | 'text';
+  /**
+   * The modal's ok button danger
+   */
+  okButtonDanger?: boolean;
+  /**
+   * The modal's ok button loading
+   */
+  confirmLoading?: boolean;
+  /**
+   * The modal's keyboard esc press handler
+   */
+  keyboard?: boolean;
+  /**
+   * The modal's onOk handler
+   */
+  onOk?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * The modal's onCancel handler
+   */
+  onCancel?: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
+  /**
+   * The modal's afterClose handler
+   */
+  afterClose?: () => void;
+  /**
+   * The modal's children
+   */
+  children?: React.ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({
+  visible = false,
+  title,
+  closable = true,
+  maskClosable = true,
+  mask = true,
+  centered = false,
+  width = 520,
+  top,
+  zIndex = 1000,
+  footer,
+  destroyOnClose = false,
+  fullscreen = false,
+  className = '',
+  style,
+  maskStyle,
+  bodyStyle,
+  headerStyle,
+  footerStyle,
+  closeIcon,
+  okText = 'OK',
+  cancelText = 'Cancel',
+  okButtonProps,
+  cancelButtonProps,
+  okType = 'primary',
+  okButtonDanger = false,
+  confirmLoading = false,
+  keyboard = true,
+  onOk,
+  onCancel,
+  afterClose,
+  children,
+}) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = React.useState(false);
+  const [destroyed, setDestroyed] = React.useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
+    if (visible) {
+      setDestroyed(false);
+    } else if (destroyOnClose) {
+      setDestroyed(true);
+    }
+  }, [visible, destroyOnClose]);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (keyboard && e.key === 'Escape' && visible) {
+        onCancel?.(e as any);
+      }
+    };
+
+    if (visible) {
+      document.addEventListener('keydown', handleEsc);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [visible, keyboard, onCancel]);
+
+  const handleMaskClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (maskClosable && e.target === e.currentTarget) {
+      onCancel?.(e);
+    }
+  };
+
+  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    onCancel?.(e);
+  };
+
+  const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
+    onOk?.(e);
+  };
+
+  const defaultFooter = (
+    <>
+      <Button onClick={handleClose} {...cancelButtonProps}>
+        {cancelText}
+      </Button>
+      <Button
+        type={okType}
+        danger={okButtonDanger}
+        loading={confirmLoading}
+        onClick={handleOk}
+        {...okButtonProps}
+      >
+        {okText}
+      </Button>
+    </>
+  );
+
+  const modalContent = (
+    <CSSTransition
+      in={visible}
+      timeout={300}
+      classNames="modal"
+      unmountOnExit
+    >
+      <div
+        className={`modal-wrapper ${className} ${centered ? 'centered' : ''} ${
+          fullscreen ? 'fullscreen' : ''
+        }`}
+        style={{ zIndex, ...style }}
+      >
+        {mask && (
+          <div
+            className="modal-mask"
+            style={maskStyle}
+            onClick={handleMaskClick}
+          />
+        )}
+        <div
+          ref={modalRef}
+          className="modal-content"
+          style={{
+            width: fullscreen ? '100%' : width,
+            top,
+          }}
+        >
+          <div className="modal-header" style={headerStyle}>
+            <div className="modal-title">{title}</div>
+            {closable && (
+              <button
+                className="modal-close"
+                onClick={handleClose}
+                aria-label="Close"
+              >
+                {closeIcon || <Icon name="close" />}
+              </button>
+            )}
+          </div>
+          <div className="modal-body" style={bodyStyle}>
+            {!destroyed && children}
+          </div>
+          {(footer !== null) && (
+            <div className="modal-footer" style={footerStyle}>
+              {footer ?? defaultFooter}
+            </div>
+          )}
+        </div>
+      </div>
+    </CSSTransition>
+  );
+
+  return mounted
+    ? ReactDOM.createPortal(modalContent, document.body)
+    : null;
+};
+
+export default Modal; 

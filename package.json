@@ -1,0 +1,57 @@
+{
+  "name": "noxui",
+  "version": "0.2.8",
+  "description": "NoxUI is a comprehensive, enterprise-ready React UI component library designed for efficiency, scalability, and seamless user experiences. Built with performance and customization in mind, NoxUI offers a rich set of pre-designed components that follow modern design principles, ensuring a consistent and elegant interface across applications.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c --bundleConfigAsCjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prince",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.3",
+    "postcss": "^8.5.3",
+    "react": "^18.3.1",
+    "rollup": "^4.18.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@types/uuid": "^10.0.0",
+    "react-icons": "^5.2.1",
+    "uuid": "^10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VpIndexSer/NOXUI.git"
+  },
+  "keywords": [
+    "react",
+    "react-toast",
+    "notification",
+    "toast",
+    "react-component",
+    "push",
+    "alert"
+  ]
+}

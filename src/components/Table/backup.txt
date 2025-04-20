@@ -1,0 +1,123 @@
+import React, { useEffect, useRef, useState } from 'react';
+import './Table.css';
+
+export interface TableColumn<T> {
+  title: string;
+  key: keyof T;
+  render?: (value: any, record: T) => React.ReactNode;
+}
+
+export interface TableProps<T> {
+  columns: TableColumn<T>[];
+  dataSource: T[];
+  className?: string;
+  pagination?: {
+    current: number;
+    pageSize: number;
+    total: number;
+    onChange: (page: number) => void;
+  };
+  infiniteScroll?: {
+    loading?: boolean;
+    hasMore: boolean;
+    onLoadMore: () => void;
+    loadingIndicator?: React.ReactNode;
+  };
+  height?: string | number;
+}
+
+export function Table<T extends Record<string, any>>({
+  columns,
+  dataSource,
+  className = '',
+  pagination,
+  infiniteScroll,
+  height = '400px',
+}: TableProps<T>) {
+  const [isNearBottom, setIsNearBottom] = useState(false);
+  const tableWrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!tableWrapperRef.current || !infiniteScroll) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = tableWrapperRef.current;
+    const threshold = 50; // pixels from bottom
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < threshold;
+
+    if (isNearBottom && !isNearBottom && infiniteScroll.hasMore && !infiniteScroll.loading) {
+      setIsNearBottom(true);
+      infiniteScroll.onLoadMore();
+    } else {
+      setIsNearBottom(false);
+    }
+  };
+
+  useEffect(() => {
+    const tableWrapper = tableWrapperRef.current;
+    if (tableWrapper && infiniteScroll) {
+      tableWrapper.addEventListener('scroll', handleScroll);
+      return () => tableWrapper.removeEventListener('scroll', handleScroll);
+    }
+  }, [infiniteScroll]);
+
+  const tableStyle = infiniteScroll ? { height, overflowY: 'auto' as const } : {};
+
+  return (
+    <div className={`custom-table-wrapper ${className}`} ref={tableWrapperRef} style={tableStyle}>
+      <table className="custom-table">
+        <thead>
+          <tr>
+            {columns.map((column, index) => (
+              <th key={index}>{column.title}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {dataSource.map((record, rowIndex) => (
+            <tr key={rowIndex}>
+              {columns.map((column, colIndex) => (
+                <td key={`${rowIndex}-${colIndex}`}>
+                  {column.render
+                    ? column.render(record[column.key], record)
+                    : record[column.key]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      
+      {infiniteScroll?.loading && (
+        <div className="table-loading">
+          {infiniteScroll.loadingIndicator || (
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {!infiniteScroll && pagination && (
+        <div className="table-pagination">
+          <button
+            className="pagination-button"
+            disabled={pagination.current === 1}
+            onClick={() => pagination.onChange(pagination.current - 1)}
+          >
+            &lt;
+          </button>
+          <span className="pagination-current">{pagination.current}</span>
+          <button
+            className="pagination-button"
+            disabled={pagination.current * pagination.pageSize >= pagination.total}
+            onClick={() => pagination.onChange(pagination.current + 1)}
+          >
+            &gt;
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Table; 

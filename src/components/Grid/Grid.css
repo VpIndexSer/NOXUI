@@ -1,0 +1,11 @@
+.grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .grid-col {
+    box-sizing: border-box;
+  }
+  

@@ -1,0 +1,85 @@
+import React from "react";
+import "./Select.css";
+
+export interface Option {
+  label: string;
+  value: string;
+}
+
+export interface OptionGroup {
+  label: string;
+  options: Option[];
+}
+
+export interface SelectProps {
+  label?: string;
+  value: string | string[]; // supports both
+  onChange: (value: string | string[]) => void;
+  options: (Option | OptionGroup)[];
+  placeholder?: string;
+  disabled?: boolean;
+  className?: string;
+  multiple?: boolean;
+}
+
+const isGroup = (opt: Option | OptionGroup): opt is OptionGroup => {
+  return (opt as OptionGroup).options !== undefined;
+};
+
+const Select: React.FC<SelectProps> = ({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder = "Select an option",
+  disabled = false,
+  className = "",
+  multiple = false,
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (multiple) {
+      const selected = Array.from(e.target.selectedOptions).map((opt) => opt.value);
+      onChange(selected);
+    } else {
+      onChange(e.target.value);
+    }
+  };
+
+  return (
+    <div className={`custom-select-wrapper ${className}`}>
+      {label && <label className="select-label">{label}</label>}
+      <select
+        className="custom-select"
+        value={value}
+        onChange={handleChange}
+        disabled={disabled}
+        multiple={multiple}
+        aria-label={label || placeholder}
+      >
+        {!multiple && (
+          <option value="" disabled hidden>
+            {placeholder}
+          </option>
+        )}
+
+        {options.map((opt, i) =>
+          isGroup(opt) ? (
+            <optgroup key={i} label={opt.label}>
+              {opt.options.map((subOpt) => (
+                <option key={subOpt.value} value={subOpt.value}>
+                  {subOpt.label}
+                </option>
+              ))}
+            </optgroup>
+          ) : (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          )
+        )}
+      </select>
+    </div>
+  );
+};
+
+export default Select;

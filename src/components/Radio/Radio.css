@@ -1,0 +1,75 @@
+/* Wrapper for the entire radio group */
+.radio-group-wrapper {
+  margin-bottom: 24px;
+}
+
+/* Optional label for group */
+.radio-group-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Layout directions */
+.radio-group.vertical .custom-radio {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.radio-group.horizontal .custom-radio {
+  display: inline-flex;
+  margin-right: 16px;
+}
+
+/* Main custom radio container */
+.custom-radio {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  color: #000;
+}
+
+/* Hide native radio */
+.custom-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Outer circle (radio ring) */
+.radio-dot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 2px solid #007aff; /* Blue ring */
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+/* Inner dot when checked */
+.custom-radio input:checked + .radio-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: #007aff; /* Inner blue dot */
+  border-radius: 50%;
+}
+
+/* Disabled state */
+.custom-radio.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

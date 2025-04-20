@@ -1,0 +1,297 @@
+.nox-select-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.nox-select-label {
+  margin-bottom: 4px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+.nox-select {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 4px 11px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  transition: all 0.3s;
+  cursor: pointer;
+  width: 100%;
+  min-height: 32px;
+}
+
+.nox-select:hover {
+  border-color: #40a9ff;
+}
+
+.nox-select-open {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.nox-select-disabled {
+  color: rgba(0, 0, 0, 0.25);
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.nox-select-disabled:hover {
+  border-color: #d9d9d9;
+}
+
+.nox-select-borderless {
+  border: none;
+  background: transparent;
+}
+
+.nox-select-borderless:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nox-select-selector {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+
+.nox-select-selection-search {
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nox-select-selection-search-input {
+  width: 100%;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  appearance: none;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.nox-select-selection-search-input::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.nox-select-selection-item-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.nox-select-selection-item {
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  padding: 0 7px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 20px;
+  background: #f0f0f0;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: default;
+  transition: all 0.3s;
+  max-width: 100%;
+}
+
+.nox-select-selection-item-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nox-select-selection-item-remove {
+  margin-left: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nox-select-selection-item-remove:hover {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.nox-select-arrow {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.nox-select-open .nox-select-arrow {
+  transform: rotate(180deg);
+}
+
+.nox-select-clear {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.nox-select-clear:hover {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.nox-select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  padding: 4px 0;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  z-index: 1050;
+  max-height: 256px;
+  overflow-y: auto;
+}
+
+.nox-select-dropdown-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.nox-select-dropdown-loading-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 2px solid #d9d9d9;
+  border-top-color: #1890ff;
+  border-radius: 50%;
+  animation: nox-spin 1s infinite linear;
+}
+
+@keyframes nox-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nox-select-dropdown-empty {
+  padding: 8px 12px;
+  color: rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.nox-select-dropdown-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nox-select-dropdown-menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px 12px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nox-select-dropdown-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.nox-select-dropdown-menu-item-active {
+  background-color: #e6f7ff;
+}
+
+.nox-select-dropdown-menu-item-selected {
+  color: #1890ff;
+  font-weight: 600;
+  background-color: #e6f7ff;
+}
+
+.nox-select-dropdown-menu-item-disabled {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+
+.nox-select-dropdown-menu-item-disabled:hover {
+  background-color: transparent;
+}
+
+.nox-select-dropdown-menu-item-group {
+  padding: 0;
+}
+
+.nox-select-dropdown-menu-item-group-title {
+  padding: 5px 12px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.nox-select-dropdown-menu-item-group-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Size variants */
+.nox-select-wrapper.small .nox-select {
+  min-height: 24px;
+  padding: 0 7px;
+}
+
+.nox-select-wrapper.small .nox-select-selection-search-input {
+  height: 22px;
+}
+
+.nox-select-wrapper.large .nox-select {
+  min-height: 40px;
+  padding: 6px 11px;
+}
+
+.nox-select-wrapper.large .nox-select-selection-search-input {
+  height: 38px;
+  font-size: 16px;
+}
+  
