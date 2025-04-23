@@ -1,0 +1,215 @@
+import React from 'react';
+import type { Meta, StoryFn } from '@storybook/react';
+import Modal from './Modal';
+import Button from '../Button';
+
+const meta: Meta<typeof Modal> = {
+  title: 'Components/Modal',
+  component: Modal,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    width: {
+      control: 'number',
+    },
+    centered: {
+      control: 'boolean',
+    },
+    closable: {
+      control: 'boolean',
+    },
+    maskClosable: {
+      control: 'boolean',
+    },
+    destroyOnClose: {
+      control: 'boolean',
+    },
+    fullscreen: {
+      control: 'boolean',
+    },
+    okType: {
+      control: 'select',
+      options: ['primary', 'default', 'dashed', 'link', 'text'],
+    },
+  },
+};
+
+export default meta;
+
+// Template for stories
+const Template: StoryFn<typeof Modal> = (args) => {
+  const [visible, setVisible] = React.useState(false);
+
+  return (
+    <>
+      <Button label="Open Modal" onClick={() => setVisible(true)} />
+      <Modal
+        {...args}
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        onOk={() => setVisible(false)}
+      />
+    </>
+  );
+};
+
+export const Basic = Template.bind({});
+Basic.args = {
+  title: 'Basic Modal',
+  children: <p>This is a basic modal dialog</p>,
+};
+
+export const CustomWidth = Template.bind({});
+CustomWidth.args = {
+  title: 'Custom Width Modal',
+  width: 800,
+  children: <p>This modal is 800px wide</p>,
+};
+
+export const Centered = Template.bind({});
+Centered.args = {
+  title: 'Centered Modal',
+  centered: true,
+  children: <p>This modal is vertically centered</p>,
+};
+
+export const CustomFooter = Template.bind({});
+CustomFooter.args = {
+  title: 'Custom Footer Modal',
+  children: <p>This modal has custom footer buttons</p>,
+  footer: (
+    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+      <Button label="Custom Cancel" variant="default" />
+      <Button label="Custom OK" variant="primary" />
+    </div>
+  ),
+};
+
+export const NoFooter = Template.bind({});
+NoFooter.args = {
+  title: 'Modal without Footer',
+  children: <p>This modal has no footer</p>,
+  footer: null,
+};
+
+// Complex example with form
+export const FormModal = () => {
+  const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [form, setForm] = React.useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleSubmit = () => {
+    setLoading(true);
+    // Simulate API call
+    setTimeout(() => {
+      setLoading(false);
+      setVisible(false);
+      alert(JSON.stringify(form, null, 2));
+    }, 1000);
+  };
+
+  return (
+    <>
+      <Button label="Open Form Modal" onClick={() => setVisible(true)} />
+      <Modal
+        title="Contact Form"
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        onOk={handleSubmit}
+        confirmLoading={loading}
+        okText="Submit"
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '8px' }}>Name</label>
+            <input
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #d9d9d9',
+                borderRadius: '4px',
+              }}
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '8px' }}>Email</label>
+            <input
+              type="email"
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #d9d9d9',
+                borderRadius: '4px',
+              }}
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '8px' }}>Message</label>
+            <textarea
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #d9d9d9',
+                borderRadius: '4px',
+                minHeight: '100px',
+              }}
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+            />
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+// Complex example with nested modals
+export const NestedModals = () => {
+  const [firstVisible, setFirstVisible] = React.useState(false);
+  const [secondVisible, setSecondVisible] = React.useState(false);
+  const [thirdVisible, setThirdVisible] = React.useState(false);
+
+  return (
+    <>
+      <Button label="Open First Modal" onClick={() => setFirstVisible(true)} />
+      <Modal
+        title="First Modal"
+        visible={firstVisible}
+        onCancel={() => setFirstVisible(false)}
+        onOk={() => setSecondVisible(true)}
+      >
+        <p>Click OK to open the second modal</p>
+      </Modal>
+      <Modal
+        title="Second Modal"
+        visible={secondVisible}
+        onCancel={() => setSecondVisible(false)}
+        onOk={() => setThirdVisible(true)}
+      >
+        <p>Click OK to open the third modal</p>
+      </Modal>
+      <Modal
+        title="Third Modal"
+        visible={thirdVisible}
+        onCancel={() => setThirdVisible(false)}
+        onOk={() => {
+          setFirstVisible(false);
+          setSecondVisible(false);
+          setThirdVisible(false);
+        }}
+      >
+        <p>Click OK to close all modals</p>
+      </Modal>
+    </>
+  );
+}; 

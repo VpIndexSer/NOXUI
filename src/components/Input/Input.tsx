@@ -5,8 +5,8 @@ export interface InputProps {
   type?: "text" | "password" | "email";
   label?: string;
   placeholder?: string;
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange?: (value: string) => void;
   disabled?: boolean;
   error?: string;
   className?: string;
@@ -16,8 +16,8 @@ const Input: React.FC<InputProps> = ({
   type = "text",
   label,
   placeholder,
-  value,
-  onChange,
+  value = "",
+  onChange = () => {},
   disabled = false,
   error,
   className = "",

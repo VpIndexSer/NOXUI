@@ -23,13 +23,13 @@ export interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
-  checked,
+  checked = false,
   defaultChecked = false,
   indeterminate = false,
   disabled = false,
   className = "",
   style,
-  onChange,
+  onChange = () => {},
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -60,7 +60,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     if (!isControlled) {
       setInternalChecked(e.target.checked);
     }
-    onChange?.(e);
+    onChange?.({ target: { checked: e.target.checked } });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLabelElement>) => {
