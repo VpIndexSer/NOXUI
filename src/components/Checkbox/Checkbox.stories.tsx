@@ -30,7 +30,7 @@ export default meta;
 
 // Template for stories
 const Template: StoryFn<typeof Checkbox> = (args) => {
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(args.checked || false);
   return (
     <Checkbox
       {...args}

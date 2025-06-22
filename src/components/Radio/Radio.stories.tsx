@@ -118,7 +118,8 @@ export const InForm: Story = {
     };
 
     return (
-      <form onSubmit={(e) => { e.preventDefault(); console.log(formData); }}>
+      <>
+      <form onSubmit={(e) => { e.preventDefault(); alert(JSON.stringify(formData)); }}>
         <div style={{ marginBottom: '1rem' }}>
           <label style={{ display: 'block', marginBottom: '0.5rem' }}>
             Name:
@@ -159,6 +160,12 @@ export const InForm: Story = {
 
         <button type="submit">Submit</button>
       </form>
+      <div style={{ marginTop: '8px' }}>
+      <pre style={{ background: '#f5f5f5', padding: '8px', borderRadius: '4px' }}>
+        {JSON.stringify(formData, null, 2)}
+      </pre>
+    </div>
+    </>
     );
   },
 }; 

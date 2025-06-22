@@ -23,7 +23,7 @@ export default meta;
 
 // Template for stories
 const Template: StoryFn<typeof DateInput> = (args) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(args.value || '');
   return <DateInput {...args} value={value} onChange={setValue} />;
 };
 

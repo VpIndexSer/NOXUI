@@ -38,7 +38,6 @@
   cursor: pointer;
   width: 100%;
   min-height: 32px;
-  padding-right: 32px;
 }
 
 .nox-select:hover {
@@ -71,29 +70,29 @@
 
 .nox-select-selector {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: relative;
 }
 
 .nox-select-selection-search {
-  flex: 0 0 auto;
-  min-width: 24px;
-  margin-left: 4px;
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .nox-select-selection-search-input {
   width: 100%;
-  min-width: 16px;
+  height: 30px;
+  padding: 0;
   background: transparent;
   border: 0;
   outline: 0;
+  cursor: pointer;
+  appearance: none;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.85);
-  padding: 0;
-  cursor: pointer;
 }
 
 .nox-select-selection-search-input::-webkit-search-cancel-button {
@@ -106,8 +105,6 @@
   flex-wrap: wrap;
   gap: 4px;
   max-width: 100%;
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
 .nox-select-selection-item {
@@ -147,15 +144,10 @@
 .nox-select-arrow {
   display: flex;
   align-items: center;
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 16px;
-  margin-left: auto;
-  margin-right: 4px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+  transition: all 0.3s;
   pointer-events: none;
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .nox-select-open .nox-select-arrow {
@@ -301,10 +293,5 @@
 .nox-select-wrapper.large .nox-select-selection-search-input {
   height: 38px;
   font-size: 16px;
-}
-
-/* 6. Hide input for single select when value is selected and not searching */
-.nox-select:not(.nox-select-open) .nox-select-selection-search-input:only-child {
-  display: none;
 }
   

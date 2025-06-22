@@ -39,7 +39,7 @@ export const Closable = Template.bind({});
 Closable.args = {
   children: 'Closable Tag',
   closable: true,
-  onClose: () => console.log('Tag closed'),
+  onClose: () => alert('Tag closed'),
 };
 
 // Multiple tags example

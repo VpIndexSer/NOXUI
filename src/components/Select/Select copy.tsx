@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Select.css";
-import { DownOutlined } from '../Icon';
 
 export interface Option {
   label: string;
@@ -371,29 +370,29 @@ const Select: React.FC<SelectProps> = ({
         onBlur={onBlur}
       >
         <div className="nox-select-selector">
-          {open || searchValue
-            ? (
-              <div className="nox-select-selection-search nox-select-selection-search--active">
-                <input
-                  ref={inputRef}
-                  className="nox-select-selection-search-input"
-                  value={searchValue}
-                  onChange={handleSearch}
-                  placeholder={selectedValues.length === 0 ? placeholder : ''}
-                  disabled={disabled}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
-            )
-            : (
-              <div className="nox-select-selection-item-container">
-                {renderTags()}
-              </div>
-            )
-          }
+          <div className="nox-select-selection-search">
+            <input
+              ref={inputRef}
+              className="nox-select-selection-search-input"
+              value={searchValue}
+              onChange={handleSearch}
+              placeholder={selectedValues.length === 0 ? placeholder : ''}
+              disabled={disabled}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+          <div className="nox-select-selection-item-container">
+            {renderTags()}
+          </div>
         </div>
         <span className="nox-select-arrow">
-          {suffixIcon || <DownOutlined />}
+          {suffixIcon || (
+            <span className="nox-select-arrow-icon">
+              <svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                <path d="M884 256H140c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h744c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
+              </svg>
+            </span>
+          )}
         </span>
         {allowClear && selectedValues.length > 0 && !disabled && (
           <span className="nox-select-clear" onClick={handleClear}>
