@@ -1,130 +1,188 @@
-# React Toast Popup
+# NOXUI
 
-React Toast Popup is a simple and customizable toast notification component for React applications.
+NOXUI is a modern, customizable React component library designed to accelerate UI development with a consistent, accessible, and beautiful set of components.
 
-![Frontend_System_Design_Questions__Toast_Component___HLD_LLD](https://github.com/piyush-eon/react-toast-popup/assets/51760520/be023ecf-39fb-4cb0-beeb-98519050ba99)
+---
 
-## Installation
+## ✨ Features
 
-You can install React Toast Popup via npm:
+- **Rich Component Set:** Buttons, Inputs, Modals, Tables, Forms, Notifications, and more.
+- **Customizable:** Easily style and theme components to fit your brand.
+- **Accessible:** Built with accessibility best practices.
+- **TypeScript Support:** Fully typed for a great developer experience.
+- **Storybook Integration:** Interactive documentation and examples.
 
-```jsx
-npm install react-toast-popup
+---
+
+## 📦 Installation
+
+```bash
+npm install noxui
+# or
+yarn add noxui
 ```
 
-## Usage
+---
 
-To use React Toast Popup in your React application, follow these steps:
+## 🚀 Usage
 
-Import the useNotification hook and necessary styles in your component:
-
-```jsx
-import useNotification from "react-toast-popup";
-```
-
-Initialize the useNotification hook with your preferred position:
+Import components as needed in your React project:
 
 ```jsx
-const { NotificationComponent, triggerNotification } =
-  useNotification("top-left");
-```
-
-#### Postions
-
-- "bottom-left"
-- "bottom-right"
-- "top-left"
-- "top-right"
-
-Use NotificationComponent in your JSX to display notifications:
-
-```jsx
-return (
-  <div className="App">
-    {NotificationComponent}
-    {/* Your other JSX content */}
-  </div>
-);
-```
-
-Trigger notifications using the triggerNotification function:
-
-```jsx
-triggerNotification({
-  type: "success",
-  message: "This is a success message!",
-  duration: 3000,
-});
-```
-
-#### Animations
-
-You can specify an animation type for the notifications. The available animations are:
-
-- "fade"
-- "pop"
-- "slide"
-
-```jsx
-triggerNotification({
-  type: "success",
-  message: "This is a success message with a pop animation!",
-  duration: 3000,
-  animation: "pop",
-});
-```
-
-## API
-
-```jsx
-useNotification(position: PositionType)
-```
-
-This hook returns an object with the following properties:
-
-- `NotificationComponent`: React element representing the notification container.
-- `triggerNotification(notificationProps: NotificationProps)`: Function to trigger a notification with the specified properties.
-
-`NotificationProps`
-The triggerNotification function accepts an object of type NotificationProps, which includes:
-
-- type: Type of the notification (success, info, warning, error).
-- message: Message to display in the notification.
-- duration: Duration in milliseconds for which the notification should be displayed.
-- animation (optional): Animation type for the notification (fade, pop, slide).
-
-## Example
-
-Here's a basic example of how to use React Toast Popup:
-
-```jsx
-import React from "react";
-import useNotification from "react-toast-popup";
+import { Button, Input, Modal, Notification } from 'noxui';
 
 function App() {
-  const { NotificationComponent, triggerNotification } =
-    useNotification("top-left");
-
-  const handleButtonClick = () => {
-    triggerNotification({
-      type: "success",
-      message: "This is a success message!",
-      duration: 3000,
-    });
-  };
-
   return (
-    <div className="App">
-      {NotificationComponent}
-      <h1>Toast Component</h1>
-      <button onClick={handleButtonClick}>Show Success</button>
+    <div>
+      <Button>Click Me</Button>
+      <Input placeholder="Type here..." />
+      {/* ...other components */}
     </div>
   );
 }
-
-export default App;
 ```
 
-## License
+---
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🧩 Components
+
+### Button
+```jsx
+import { Button } from 'noxui';
+
+<Button type="primary" onClick={handleClick}>Primary Button</Button>
+```
+
+### Input
+```jsx
+import { Input } from 'noxui';
+
+<Input placeholder="Enter text" />
+```
+
+### Checkbox
+```jsx
+import { Checkbox } from 'noxui';
+
+<Checkbox label="Accept Terms" />
+```
+
+### Radio
+```jsx
+import { Radio } from 'noxui';
+
+<Radio label="Option 1" />
+```
+
+### Select
+```jsx
+import { Select } from 'noxui';
+
+<Select options={[{ label: 'One', value: 1 }]} />
+```
+
+### DateInput
+```jsx
+import { DateInput } from 'noxui';
+
+<DateInput />
+```
+
+
+### Drawer
+```jsx
+import { Drawer } from 'noxui';
+
+<Drawer open={isDrawerOpen} onClose={closeDrawer}>Drawer Content</Drawer>
+```
+
+### Notification
+```jsx
+import { useNotification } from 'noxui';
+
+const { NotificationComponent, triggerNotification } = useNotification();
+
+triggerNotification({
+  type: 'success',
+  message: 'Operation successful!',
+  duration: 3000,
+});
+```
+
+### Table
+```jsx
+import { Table } from 'noxui';
+
+<Table columns={columns} data={data} />
+```
+
+### Tag
+```jsx
+import { Tag } from 'noxui';
+
+<Tag color="blue">Info</Tag>
+```
+
+### TextArea
+```jsx
+import { TextArea } from 'noxui';
+
+<TextArea placeholder="Type your message..." />
+```
+
+### Grid
+```jsx
+import { Grid, Row, Col } from 'noxui';
+
+<Grid>
+  <Row>
+    <Col span={12}>Left</Col>
+    <Col span={12}>Right</Col>
+  </Row>
+</Grid>
+```
+
+### Icon
+```jsx
+import { Icon } from 'noxui';
+
+<Icon name="down-outlined" />
+```
+
+---
+
+## 📚 Storybook
+
+To explore all components interactively, run:
+
+```bash
+npm run storybook
+```
+
+---
+
+## 🛠️ Customization & Theming
+
+NOXUI supports easy customization via CSS variables and custom class names. You can override styles in your own CSS or extend components as needed.
+
+---
+
+## 🧑‍💻 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgements
+
+- Built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/).
